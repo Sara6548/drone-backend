@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+python-multipart
+pydantic
+sqlalchemy
+psycopg2-binary
+
+# Legg til i eksisterende requirements.txt
+aiohttp>=3.8.0
