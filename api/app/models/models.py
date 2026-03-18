@@ -85,11 +85,12 @@ class Detection(Base):
     confidence   = Column(DECIMAL(5, 4))
     bounding_box = Column(JSONB)
     image_path   = Column(String(500))
+    
     timestamp    = Column(TIMESTAMP, server_default=func.now())
 
     mission = relationship("Mission", back_populates="detections")
     
-        # NY - legg til denne linjen:
+       ## dette linjer er ny
     genomic_data = relationship("GenomicAnalysis", back_populates="detection", cascade="all, delete-orphan")
 
 

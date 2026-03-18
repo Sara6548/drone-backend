@@ -7,3 +7,6 @@ psycopg2-binary
 
 # Legg til i eksisterende requirements.txt
 aiohttp>=3.8.0
+
+# NY - legg til influxdb-client
+influxdb-client

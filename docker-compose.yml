@@ -12,8 +12,8 @@ services:
       - pgdata:/var/lib/postgresql/data
       - ./db/init:/docker-entrypoint-initdb.d
     restart: unless-stopped
-    healthcheck: #CLAUDE
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"] 
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -24,6 +24,9 @@ services:
     environment:
       DATABASE_URL: ${DATABASE_URL}
       STORAGE_DIR: ${STORAGE_DIR}
+      INFLUXDB_URL: ${INFLUXDB_URL}
+      INFLUXDB_TOKEN: ${INFLUXDB_TOKEN}
+
     ports:
       - "8000:8000"
     volumes:
@@ -34,5 +37,21 @@ services:
         condition: service_healthy
     restart: unless-stopped
 
+  influxdb:
+    image: influxdb:2.7
+    container_name: drone-influxdb
+    ports:
+      - "8086:8086"
+    volumes:
+      - influxdb-data:/var/lib/influxdb2
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD=${INFLUXDB_ADMIN_PASSWORD}
+      - DOCKER_INFLUXDB_INIT_ORG=drone-system
+      - DOCKER_INFLUXDB_INIT_BUCKET=drone-telemetry
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=${INFLUXDB_TOKEN}
+
 volumes:
   pgdata:
+  influxdb-data:

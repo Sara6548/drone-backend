@@ -30,3 +30,5 @@ class NCBIService:
             "sopp.": ["fungi", "mushroom", "basidiomycota"],
         }
         return expanded_terms.get(query.lower(), [query])
+    
+    

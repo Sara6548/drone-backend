@@ -1,4 +1,5 @@
 # api/app/models/genomics.py
+
 from sqlalchemy import Column, BigInteger, String, Text, Enum, TIMESTAMP, DECIMAL, ForeignKey, Boolean, JSON
 from sqlalchemy.dialects.postgresql import UUID, JSONB
 from sqlalchemy.orm import relationship

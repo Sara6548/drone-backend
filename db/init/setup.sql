@@ -57,7 +57,7 @@ CREATE TABLE system_logs (
     timestamp   TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Aktiver UUID extension hvis ikke allerede akrivert.
+
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
